@@ -1,19 +1,19 @@
 import java.util.concurrent.Executors;
-import java.util.concurrent.ExecutorsService;
+import java.util.concurrent.ExecutorService;
+import java.io.Console;
 
 public class ThreadPoolApp {
     public static void main(String[] args) {
-        if (args.length<2)
-            THreadPoolApp.error();
+        Console c = System.console();
         try {
-            int numberOfJobs = Integer.parseInt(args[0]);
-            int numberOfThreads = Integer.parseInt(args[1]);
+            int numberOfJobs = Integer.parseInt(c.readLine("Number of jobs: "));
+            int numberOfThreads = Integer.parseInt(c.readLine("Number of threads: "));
             if ((numberOfJobs < 1) || (numberOfThreads < 1))
                 ThreadPoolApp.error();
-            ExecutorService pool = Exectutors.newFixedThreadPool(numberOfThreads);
+            ExecutorService pool = Executors.newFixedThreadPool(numberOfThreads);
             Job[] jobs = new Job[numberOfJobs];
             for (int i = 0; i <numberOfJobs; i++) {
-                job[i] = new Job(i);
+                jobs[i] = new Job(i);
                 pool.execute(jobs[i]); //exec the given command at some future time
             }
             pool.shutdown();
